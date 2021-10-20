@@ -1,0 +1,44 @@
+<form [formGroup]="form">
+
+	<h2>Click the add button below</h2>
+	<button (click)="addCreds()">Add</button>
+	<div formArrayName="credentials"
+		*ngFor="let creds of form.controls.credentials?.value; let i = index;trackBy:trackFn">
+		<div [formGroupName]="i" style="display: flex">
+			<select (ngModelChange)="changeAction($event,i)" formControlName="action">
+              <option *ngFor="let option of options;" value="{{option.key}}"> {{option.value}} </option>
+            </select>
+			<input placeholder="Name" formControlName="name">
+			<div>
+				<input placeholder="Label" formControlName="label">
+            </div>
+				<div>
+					<button (click)="updateData(i)">Toggle</button>
+
+					<div class="col-md-12 no-padding" style="margin-bottom: 5px;">
+						<label style="color: rgb(0, 23, 128);;font-weight: 500; margin-right: 20px;">Services : </label>
+	
+						<select (change)="onChange($event)" formControlName="replytype" class="form-control select2" type="text"
+							style="width: 20%;">
+							<!-- <option value="predefined">Predefined</option> -->
+							<option selected value="Oracle" style="font-style: normal; font-size: 20px; color: black;">Oracle</option>
+							<option selected value="MySQL">MySQL</option>
+							<option selected value="SQLServer">SQLServer</option>
+							<option selected value="MongoDB">MongoDB</option>
+						</select>
+					</div>
+
+					
+
+
+
+          Ptinr{{hideArray[i] | json}} 
+				</div>
+			</div>
+		</div>
+
+</form>
+
+<pre>
+      {{ form?.getRawValue() | json }}
+    </pre>
